@@ -54,11 +54,11 @@ namespace IFSPStore.App.Others
                 var user = new User
                 {
                     Login = "admin",
-                    Password = "admin",
+                    Password = "Xile@7227",
                     Name = "System Admin",
                     Active = true,
                     RegistrationDate = DateTime.Now,
-                    Email = "admin@gmail.com"
+                    Email = "manoelneno12@gmail.com"
                 };
                 _userService.Add<User, User, UserValidator>(user);
             }
