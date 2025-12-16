@@ -52,6 +52,13 @@ namespace IFSPStore.App
             ShowForm<CityForm>();
         }
 
+ 
+        private void saleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowForm<SaleForm>();
+        }
+  
+
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);

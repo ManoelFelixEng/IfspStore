@@ -10,6 +10,7 @@ using IFSPStore.Service.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace IFSPStore.App.Infra
 {
@@ -33,6 +34,8 @@ namespace IFSPStore.App.Infra
             );
 
             #region Repositories
+            services.AddScoped<IBaseRepository<Sale>, BaseRepository<Sale>>();
+            services.AddScoped<IBaseRepository<Product>, BaseRepository<Product>>();
             services.AddScoped<IBaseRepository<Category>, BaseRepository<Category>>();
             services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
             services.AddScoped<IBaseRepository<City>, BaseRepository<City>>();
@@ -41,14 +44,18 @@ namespace IFSPStore.App.Infra
             #endregion
 
             #region Services
+
             services.AddScoped<IBaseService<Category>, BaseService<Category>>();
             services.AddScoped<IBaseService<User>, BaseService<User>>();
             services.AddScoped<IBaseService<City>, BaseService<City>>();
             services.AddScoped<IBaseService<Customer>, BaseService<Customer>>();
+            services.AddScoped<IBaseService<Sale>, BaseService<Sale>>();
+            services.AddScoped<IBaseService<Product>, BaseService<Product>>();
 
             #endregion
 
             #region Forms
+            services.AddScoped<SaleForm, SaleForm>(); 
             services.AddTransient<Login, Login>();
             services.AddScoped<CategoryForm, CategoryForm>();
             services.AddScoped<UserForm, UserForm>();
@@ -60,7 +67,9 @@ namespace IFSPStore.App.Infra
             #region Mappings
             services.AddSingleton(
                 new MapperConfiguration(
-                    config => { 
+                    config => {
+                        config.CreateMap<Sale, SaleViewModel>();
+                        config.CreateMap<Product, ProductViewModel>();
                         config.CreateMap<Category, CategoryViewModel>();
                         config.CreateMap<User, UserViewModel>();
                         config.CreateMap<City, CityViewModel>();
